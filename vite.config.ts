@@ -9,4 +9,5 @@ export default defineConfig({
       '/health': 'https://luma-eight-sepia.vercel.app/health',
     },
   },
+
 })
