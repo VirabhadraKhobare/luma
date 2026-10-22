@@ -29,7 +29,7 @@ export const config = {
   tavilyKey: process.env.TAVILY_API_KEY || '',
   googleClientId: process.env.GOOGLE_CLIENT_ID || '',
   googleClientSecret: process.env.GOOGLE_CLIENT_SECRET || '',
-  googleRedirectUri: process.env.GOOGLE_REDIRECT_URI || 'http://localhost:8787/api/auth/google/callback',
+  googleRedirectUri: process.env.GOOGLE_REDIRECT_URI || 'https://luma-eight-sepia.vercel.app/api/auth/google/callback',
   maxContextTokens: Number(process.env.MAX_CONTEXT_TOKENS || 12000),
   requireApiKey() { return required('AI_API_KEY') },
   requireChatModel() { return required('AI_CHAT_MODEL') },
