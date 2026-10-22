@@ -5,8 +5,8 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      '/api': 'http://localhost:8787',
-      '/health': 'http://localhost:8787',
+      '/api': 'https://luma-eight-sepia.vercel.app/api',
+      '/health': 'https://luma-eight-sepia.vercel.app/health',
     },
   },
 })
