@@ -1,5 +1,6 @@
 import { readFile } from 'node:fs/promises'
-import { join } from 'node:path'
+import { dirname, join } from 'node:path'
+import { fileURLToPath } from 'node:url'
 import { Pool, type PoolClient, type QueryResultRow } from 'pg'
 import { config } from './config'
 
@@ -38,5 +39,6 @@ export async function userQuery<T extends QueryResultRow>(userId: string, text: 
 export async function migrate() {
   if (!pool) return
   const files = ['001_initial.sql', '002_rls.sql', '003_google_oidc.sql']
-  for (const file of files) await pool.query(await readFile(join(process.cwd(), 'migrations', file), 'utf8'))
+  const migrationsDir = join(dirname(fileURLToPath(import.meta.url)), '..', 'migrations')
+  for (const file of files) await pool.query(await readFile(join(migrationsDir, file), 'utf8'))
 }

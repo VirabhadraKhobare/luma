@@ -1,14 +1,14 @@
 # Intelligence Layer
 
-The intelligence service lives in [`server/`](../server/) and is intentionally provider-neutral. Browser code calls `/api/chat`; provider credentials are read only by the Node process and are never exposed through Vite or `VITE_*` variables.
+The intelligence service lives in [`backend/server/`](../backend/server/) and is intentionally provider-neutral. Browser code calls `/api/chat`; provider credentials are read only by the Node process and are never exposed through Vite or `VITE_*` variables.
 
 ## Runtime setup
 
 ```bash
-copy .env.example .env
+copy backend/.env.example backend/.env
 # Set AI_API_KEY and AI_CHAT_MODEL in .env
-npm run dev:api
-npm run dev
+npm --prefix backend run dev
+npm --prefix frontend run dev
 ```
 
 `AI_BASE_URL` supports OpenAI-compatible APIs, including self-hosted gateways. The service returns HTTP 503 when a required provider is not configured; it never substitutes a hardcoded answer.

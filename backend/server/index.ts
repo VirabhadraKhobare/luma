@@ -43,7 +43,7 @@ async function body(request: IncomingMessage) {
 }
 function statusFor(error: unknown) {
   const message = error instanceof Error ? error.message : ''
-  if (message.includes('Authentication required') || message.includes('invalid or expired') || message.includes('Invalid email') || message.includes('Invalid access token')) return 401
+  if (message.includes('Authentication required') || message.includes('invalid or expired') || message === 'Invalid email or password' || message.includes('Invalid access token')) return 401
   if (message.includes('CSRF') || message.includes('Role ')) return 403
   if (message.includes('not configured') || message.includes('DATABASE_URL') || message.includes('No model')) return 503
   if (message.includes('rate limit') || message.includes('quota')) return 429

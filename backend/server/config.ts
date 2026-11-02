@@ -1,3 +1,11 @@
+import { loadEnvFile } from 'node:process'
+
+try {
+  loadEnvFile('.env')
+} catch (error) {
+  if ((error as NodeJS.ErrnoException).code !== 'ENOENT') throw error
+}
+
 function required(name: string): string {
   const value = process.env[name]
   if (!value) throw new Error(`${name} is required for the configured AI provider`)
@@ -9,8 +17,7 @@ export const config = {
   nodeEnv: process.env.NODE_ENV || 'development',
   databaseUrl: process.env.DATABASE_URL || '',
   databaseSsl: process.env.DATABASE_SSL === 'true',
-  // sessionSecret: process.env.SESSION_SECRET || 'development-only-session-secret-change-me',
-  sessionSecret:process.env.NODE_ENV === 'production'? required('SESSION_SECRET'): process.env.SESSION_SECRET || 'development-only-session-secret-change-me',
+  sessionSecret: process.env.NODE_ENV === 'production' ? required('SESSION_SECRET') : process.env.SESSION_SECRET || 'development-only-session-secret-change-me',
   cookieSecure: process.env.COOKIE_SECURE === 'true',
   cookieSameSite: process.env.COOKIE_SAME_SITE || 'lax',
   allowedOrigin: process.env.ALLOWED_ORIGIN || 'http://localhost:5173',
@@ -29,7 +36,7 @@ export const config = {
   tavilyKey: process.env.TAVILY_API_KEY || '',
   googleClientId: process.env.GOOGLE_CLIENT_ID || '',
   googleClientSecret: process.env.GOOGLE_CLIENT_SECRET || '',
-  googleRedirectUri: process.env.GOOGLE_REDIRECT_URI || 'https://luma-eight-sepia.vercel.app/api/auth/google/callback',
+  googleRedirectUri: process.env.GOOGLE_REDIRECT_URI || 'http://localhost:8787/api/auth/google/callback',
   maxContextTokens: Number(process.env.MAX_CONTEXT_TOKENS || 12000),
   requireApiKey() { return required('AI_API_KEY') },
   requireChatModel() { return required('AI_CHAT_MODEL') },

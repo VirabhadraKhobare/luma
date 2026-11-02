@@ -1,4 +1,4 @@
-name: backend
+name: CI
 on:
   push:
     branches: [main]
@@ -13,8 +13,24 @@ jobs:
         with:
           node-version: 22
           cache: npm
-      - run: npm ci
-      - run: npm audit --omit=dev --audit-level=high
-      - run: npm test
-      - run: npm run build
-      - run: docker build --tag luma-backend:${{ github.sha }} .
+          cache-dependency-path: |
+            frontend/package-lock.json
+            backend/package-lock.json
+      - name: Install backend dependencies
+        run: npm ci --workspaces=false
+        working-directory: backend
+      - name: Install frontend dependencies
+        run: npm ci --workspaces=false
+        working-directory: frontend
+      - name: Audit backend dependencies
+        run: npm audit --omit=dev --audit-level=high
+        working-directory: backend
+      - name: Test backend
+        run: npm test
+        working-directory: backend
+      - name: Type-check backend
+        run: npm run typecheck
+        working-directory: backend
+      - name: Build frontend
+        run: npm run build
+        working-directory: frontend
