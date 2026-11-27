@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/VirabhadraKhobare/luma/actions/workflows/backend.yml/badge.svg)](https://github.com/VirabhadraKhobare/luma/actions/workflows/backend.yml)
 [![Deploy](https://github.com/VirabhadraKhobare/luma/actions/workflows/deploy.yml/badge.svg)](https://github.com/VirabhadraKhobare/luma/actions/workflows/deploy.yml)
-[![Live application](https://img.shields.io/badge/live_application-visit-6d5dfc)](https://luma-eight-sepia.vercel.app)
+[![Live application](https://img.shields.io/badge/live_application-visit-6d5dfc)](https://frontend-omega-three-63.vercel.app/)
 
 Luma is a provider-neutral, full-stack AI assistant designed for conversational work, persistent conversations, document context, and verified tool-assisted answers.
 
